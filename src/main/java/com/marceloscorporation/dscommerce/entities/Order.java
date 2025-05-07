@@ -8,22 +8,23 @@ import java.time.Instant;
 @Table(name = "tb_order")
 public class Order {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-   @Column(columnDefinition = "TIMESTEMP WITHOUT TIME ZONE")
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant moment;
     private OrderStatus status;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
-    private  User client;
+    private User client;
 
-    @OneToOne(mappedBy = "order",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
 
-    public Order(){
+
+    public Order() {
 
     }
 
@@ -75,3 +76,4 @@ public class Order {
         this.payment = payment;
     }
 }
+
