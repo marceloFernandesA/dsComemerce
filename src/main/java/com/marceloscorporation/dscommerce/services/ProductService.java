@@ -20,10 +20,11 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public ProductDto findById(Long id){
-        Optional<Product> result = repository.findById(id);
-        Product product = result.get();
-        ProductDto dto = new ProductDto(product);
-        return dto;
+            Optional<Product> result = repository.findById(id);
+            Product product = result.orElseThrow(
+                    ()-> new RuntimeException("Recurso não encontrado"));
+            ProductDto dto = new ProductDto(product);
+            return dto;
     }
 
     @Transactional(readOnly = true)
