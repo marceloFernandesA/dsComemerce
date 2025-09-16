@@ -60,6 +60,15 @@ VALUES ('Maria Brown', 'maria@gmail.com', '988888888', '123456', TO_DATE('2001-0
 INSERT INTO tb_user (name, email, phone, password, birth_date)
 VALUES ('Alex Green', 'alex@gmail.com', '977777777', '123456', TO_DATE('1987-12-13', 'YYYY-MM-DD'));
 
+INSERT INTO tb_user (name, email, password) VALUES ('Alex', 'alex@gmail.com', ' $2a$10$qd8A5qhacKXY2qTGadvEk.Qcp7VwlRHOsUwiMOFGxUhka9VSHanmi');
+INSERT INTO tb_user (name, email, password) VALUES ('Maria', 'maria@gmail.com', ' $2a$10$qd8A5qhacKXY2qTGadvEk.Qcp7VwlRHOsUwiMOFGxUhka9VSHanmi');
+
+INSERT INTO tb_role (authority) VALUES ('ROLE_CLIENT');
+INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
+
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 1);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
 
 INSERT INTO tb_order (moment, status, client_id) VALUES (TO_TIMESTAMP('2022-07-29 15:50:00','YYYY-MM-DD HH24:MI:SS'), 3, 2);
 INSERT INTO tb_order (moment, status, client_id) VALUES (TO_TIMESTAMP('2022-08-03 14:20:00','YYYY-MM-DD HH24:MI:SS'), 0, 1);

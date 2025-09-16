@@ -4,6 +4,8 @@ import com.marceloscorporation.dscommerce.dto.ProductDto;
 import com.marceloscorporation.dscommerce.entities.Product;
 import com.marceloscorporation.dscommerce.repositories.ProductRepository;
 import com.marceloscorporation.dscommerce.services.ProductService;
+import com.marceloscorporation.dscommerce.services.execeptions.DataBaseException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,13 +29,15 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductDto>> findAll(Pageable pageable){
-        Page<ProductDto>dto = service.findByAll(pageable);
+    public ResponseEntity<Page<ProductDto>> findAll(
+            @RequestParam(name = "name", defaultValue = "")String name,
+            Pageable pageable){
+        Page<ProductDto>dto = service.findByAll(name,pageable);
         return ResponseEntity.ok(dto);
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> insert(@RequestBody ProductDto dto){
+    public ResponseEntity<ProductDto> insert(@Valid @RequestBody ProductDto dto){
         dto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
@@ -42,13 +46,13 @@ public class ProductController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProductDto> update(@PathVariable Long id,@RequestBody ProductDto dto) {
+    public ResponseEntity<ProductDto> update(@PathVariable Long id,@Valid @RequestBody ProductDto dto) {
         dto = service.update(id, dto);
         return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) throws DataBaseException {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
