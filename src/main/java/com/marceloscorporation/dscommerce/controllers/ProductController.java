@@ -1,6 +1,7 @@
 package com.marceloscorporation.dscommerce.controllers;
 
 import com.marceloscorporation.dscommerce.dto.ProductDto;
+import com.marceloscorporation.dscommerce.dto.ProductMinDto;
 import com.marceloscorporation.dscommerce.entities.Product;
 import com.marceloscorporation.dscommerce.repositories.ProductRepository;
 import com.marceloscorporation.dscommerce.services.ProductService;
@@ -29,10 +30,10 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductDto>> findAll(
+    public ResponseEntity<Page<ProductMinDto>> findAll(
             @RequestParam(name = "name", defaultValue = "")String name,
             Pageable pageable){
-        Page<ProductDto>dto = service.findByAll(name,pageable);
+        Page<ProductMinDto>dto = service.findByAll(name,pageable);
         return ResponseEntity.ok(dto);
     }
 

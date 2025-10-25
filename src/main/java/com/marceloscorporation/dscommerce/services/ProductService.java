@@ -2,6 +2,7 @@ package com.marceloscorporation.dscommerce.services;
 
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 import com.marceloscorporation.dscommerce.dto.ProductDto;
+import com.marceloscorporation.dscommerce.dto.ProductMinDto;
 import com.marceloscorporation.dscommerce.entities.Product;
 import com.marceloscorporation.dscommerce.repositories.ProductRepository;
 import com.marceloscorporation.dscommerce.services.execeptions.DataBaseException;
@@ -34,9 +35,9 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ProductDto> findByAll(String name,Pageable pageable){
+    public Page<ProductMinDto> findByAll(String name,Pageable pageable){
         Page<Product> result = repository.searchByName(name,pageable);
-        return result.map(x -> new ProductDto(x));
+        return result.map(x -> new ProductMinDto(x));
 
     }
 
