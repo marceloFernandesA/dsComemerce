@@ -1,8 +1,10 @@
 package com.marceloscorporation.dscommerce.services;
 
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
+import com.marceloscorporation.dscommerce.dto.CategoryDTO;
 import com.marceloscorporation.dscommerce.dto.ProductDto;
 import com.marceloscorporation.dscommerce.dto.ProductMinDto;
+import com.marceloscorporation.dscommerce.entities.Category;
 import com.marceloscorporation.dscommerce.entities.Product;
 import com.marceloscorporation.dscommerce.repositories.ProductRepository;
 import com.marceloscorporation.dscommerce.services.execeptions.DataBaseException;
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -84,6 +87,14 @@ public class ProductService {
         entity.setDescription(dto.getDescription());
         entity.setPrice(dto.getPrice());
         entity.setImgUrl(dto.getImgUrl());
+
+        entity.getCategories().clear();
+        for(CategoryDTO catDto : dto.getCategories()){
+            Category cat = new Category();
+                    cat.setId(catDto.getId());
+            entity.getCategories().add(cat);
+
+        }
     }
 
 

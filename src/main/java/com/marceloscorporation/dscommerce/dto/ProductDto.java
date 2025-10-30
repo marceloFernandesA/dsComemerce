@@ -1,10 +1,15 @@
 package com.marceloscorporation.dscommerce.dto;
 
 
+import com.marceloscorporation.dscommerce.entities.Category;
 import com.marceloscorporation.dscommerce.entities.Product;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDto {
 
@@ -18,6 +23,9 @@ public class ProductDto {
     @Positive(message = "O preço deve ser positivo")
     private Double price;
     private String imgUrl;
+
+    @NotEmpty(message = "Favor preencher uma categoria")
+    private List<CategoryDTO> categories = new ArrayList<>();
 
     public ProductDto(){
 
@@ -37,6 +45,11 @@ public class ProductDto {
         description = entity.getDescription();
         price = entity.getPrice();
         imgUrl = entity.getImgUrl();
+        for(Category cat : entity.getCategories()){
+            categories.add(new CategoryDTO(cat));
+
+        }
+
     }
 
     public Long getId() {
@@ -57,5 +70,9 @@ public class ProductDto {
 
     public String getImgUrl() {
         return imgUrl;
+    }
+
+    public List<CategoryDTO> getCategories() {
+        return categories;
     }
 }
