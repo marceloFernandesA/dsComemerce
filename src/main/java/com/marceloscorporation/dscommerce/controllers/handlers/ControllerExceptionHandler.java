@@ -3,6 +3,7 @@ package com.marceloscorporation.dscommerce.controllers.handlers;
 import com.marceloscorporation.dscommerce.dto.CustomError;
 import com.marceloscorporation.dscommerce.dto.ValidationError;
 import com.marceloscorporation.dscommerce.services.execeptions.DataBaseException;
+import com.marceloscorporation.dscommerce.services.execeptions.ForbiddenException;
 import com.marceloscorporation.dscommerce.services.execeptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,13 @@ import java.time.Instant;
             }
             return ResponseEntity.status(status).body(err);
 
+        }
+
+        @ExceptionHandler(ForbiddenException.class)
+        public ResponseEntity<CustomError> forbidden(ForbiddenException e, HttpServletRequest request) {
+            HttpStatus status = HttpStatus.FORBIDDEN;
+            CustomError err = new CustomError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
+            return ResponseEntity.status(status).body(err);
         }
     }
 

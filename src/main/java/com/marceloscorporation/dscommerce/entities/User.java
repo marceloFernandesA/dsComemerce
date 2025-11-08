@@ -82,6 +82,17 @@ public class User implements UserDetails {
         this.birthDate = birthDate;
     }
 
+    /* public boolean hasRole(String userId){
+        User me = userService.authenticated()
+
+            if (!me.hasRole("ROLE_ADMIN") && !me.getId().eqauls(userId)){
+                throw new ForbiddenException("Acess denied");
+            }
+        }
+        return false;
+    }*/
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
