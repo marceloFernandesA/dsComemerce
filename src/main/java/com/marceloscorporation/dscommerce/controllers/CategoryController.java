@@ -24,8 +24,6 @@ public class CategoryController {
     @Autowired
     private CategoryService service;
 
-
-
     @GetMapping
     public ResponseEntity<List<CategoryDTO>> findAll(){
        List<CategoryDTO>list = service.findByAll();

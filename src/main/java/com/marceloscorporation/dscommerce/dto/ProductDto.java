@@ -3,10 +3,7 @@ package com.marceloscorporation.dscommerce.dto;
 
 import com.marceloscorporation.dscommerce.entities.Category;
 import com.marceloscorporation.dscommerce.entities.Product;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +17,7 @@ public class ProductDto {
     @Size (min = 10,message = "Descrição precisa ter no mínimo 10 caracteres")
     @NotBlank (message = "Campo requerido")
     private String description;
+    @NotNull(message = "Campo requerido")
     @Positive(message = "O preço deve ser positivo")
     private Double price;
     private String imgUrl;
