@@ -19,6 +19,10 @@ public class PaymentDTO {
       moment = entity.getMoment();
     }
 
+    public PaymentDTO() {
+
+    }
+
     public Long getId() {
         return id;
     }

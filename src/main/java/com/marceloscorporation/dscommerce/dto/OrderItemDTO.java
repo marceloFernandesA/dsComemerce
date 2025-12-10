@@ -28,6 +28,10 @@ public class OrderItemDTO {
         imgUrl = entity.getProduct().getImgUrl();
     }
 
+    public OrderItemDTO() {
+
+    }
+
     public Long getProductId() {
         return productId;
     }

@@ -28,6 +28,10 @@ public class OrderDTO {
         this.payment = payment;
     }
 
+    public OrderDTO() {
+
+    }
+
     public OrderDTO(Order entity) {
         id = entity.getId();
         moment = entity.getMoment();

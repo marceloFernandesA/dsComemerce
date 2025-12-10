@@ -12,6 +12,10 @@ public class ClientDTO {
         this.name = name;
     }
 
+    public ClientDTO() {
+
+    }
+
     public ClientDTO(User entity) {
        id = entity.getId();
        name = entity.getName();
