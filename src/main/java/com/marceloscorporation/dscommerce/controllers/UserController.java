@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CLIENT')")
     @GetMapping(value = "/me")
     public ResponseEntity<UserDTO> getMe() {
         UserDTO dto = service.getMe();
