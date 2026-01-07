@@ -2,6 +2,7 @@ package com.marceloscorporation.dscommerce.controllers;
 
 import com.marceloscorporation.dscommerce.dto.OrderDTO;
 import com.marceloscorporation.dscommerce.services.OrderService;
+import com.marceloscorporation.dscommerce.services.execeptions.ForbiddenException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class OrderController {
 
     @PreAuthorize("hasAnyRole('ADMIN', 'CLIENT')")
     @GetMapping(value = "/{id}")
-    public ResponseEntity<OrderDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<OrderDTO> findById(@PathVariable Long id) throws ForbiddenException {
         OrderDTO dto = service.findById(id);
         return ResponseEntity.ok(dto);
     }
